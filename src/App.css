@@ -1,0 +1,15 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.app-container {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
