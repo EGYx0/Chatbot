@@ -6,7 +6,10 @@ import ChatMessages from "./ChatMessages";
 import { Chatbot } from "supersimpledev";
 
 function App() {
-  const [chatMessages, setChatMessages] = useState([]);
+  const [chatMessages, setChatMessages] = useState(() => {
+    return JSON.parse(localStorage.getItem("messages")) || [];
+  });
+  // adding any message you want once....
   useEffect(() => {
     Chatbot.addResponses({
       ahmad: "lala",
@@ -15,6 +18,9 @@ function App() {
       },
     });
   }, []);
+  useEffect(() => {
+    localStorage.setItem("messages", JSON.stringify(chatMessages));
+  }, [chatMessages]);
   return (
     <div className="app-container">
       {chatMessages.length === 0 ? (
