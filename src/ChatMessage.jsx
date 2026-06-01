@@ -1,10 +1,8 @@
+import dayjs from "dayjs";
 import styles from "./ChatMessage.module.css";
 import robot from "./assets/robot.jpg";
 import user from "./assets/user.png";
-import dayjs from "dayjs";
-function ChatMessage({ message, sender }) {
-  const time = dayjs().format("HH:mm A");
-
+function ChatMessage({ message, sender, time }) {
   return (
     <div
       className={
@@ -18,7 +16,9 @@ function ChatMessage({ message, sender }) {
       )}
       <div className={`${styles["chat-message-text"]}`}>
         {message}
-        <span className={`${styles.messageTime}`}>{time}</span>
+        <span className={`${styles.messageTime}`}>
+          {dayjs(time).format("h:mma")}
+        </span>
       </div>
       {sender === "user" && (
         <img src={user} className={`${styles["chat-message-profile"]}`} />
