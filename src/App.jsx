@@ -1,47 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
-import ChatInput from "./ChatInput";
-import ChatMessage from "./ChatMessage";
-import ChatMessages from "./ChatMessages";
-import { Chatbot } from "supersimpledev";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import Login from "./Login";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import ChatContainer from "./ChatContainer";
 
 function App() {
-  const [chatMessages, setChatMessages] = useState(() => {
-    return JSON.parse(localStorage.getItem("messages")) || [];
-  });
-  // adding any message you want once....
-  useEffect(() => {
-    Chatbot.addResponses({
-      ahmad: "lala",
-      "give me a unique id": function () {
-        return `sure here is your id ${crypto.randomUUID()}`;
-      },
-    });
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("messages", JSON.stringify(chatMessages));
-  }, [chatMessages]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
   return (
-    <div className="app-container">
-      {chatMessages.length === 0 ? (
-        <p>
-          Welcome to the chatbot project! Send a message using the textbox
-          below.
-        </p>
-      ) : (
-        <ChatMessages chatMessages={chatMessages} />
-      )}
-      <ChatInput
-        chatMessages={chatMessages}
-        setChatMessages={setChatMessages}
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/"
+        element={
+          <>
+            <h1>Hello from home</h1>
+            <button
+              onClick={() => {
+                setIsLoggedIn(true);
+                navigate("/chat");
+              }}
+            >
+              Log In
+            </button>
+          </>
+        }
       />
-      <dotlottie-player
-        src="your-animation.lottie"
-        autoplay
-        loop
-        style={{ width: "200px", height: "200px" }}
-      ></dotlottie-player>
-    </div>
+      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+        <Route path="/chat" element={<ChatContainer />} />
+      </Route>
+    </Routes>
   );
 }
 
