@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Login from "./Login";
@@ -6,7 +5,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import ChatContainer from "./ChatContainer";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -19,7 +17,6 @@ function App() {
             <h1>Hello from home</h1>
             <button
               onClick={() => {
-                setIsLoggedIn(true);
                 navigate("/chat");
               }}
             >
@@ -28,7 +25,7 @@ function App() {
           </>
         }
       />
-      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+      <Route element={<ProtectedRoute />}>
         <Route path="/chat" element={<ChatContainer />} />
       </Route>
     </Routes>

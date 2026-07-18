@@ -1,9 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useAuth } from "./auth/useAuth";
 import { Chatbot } from "supersimpledev";
 import ChatInput from "./ChatInput";
 import ChatMessages from "./ChatMessages";
 function ChatContainer() {
+  const { user } = useAuth();
   const [chatMessages, setChatMessages] = useState(() => {
     return JSON.parse(localStorage.getItem("messages")) || [];
   });
@@ -23,8 +25,8 @@ function ChatContainer() {
     <div className="app-container">
       {chatMessages.length === 0 ? (
         <p>
-          Welcome to the chatbot project! Send a message using the textbox
-          below.
+          Welcome {user.name} to the chatbot project! Send a message using the
+          textbox below.
         </p>
       ) : (
         <ChatMessages chatMessages={chatMessages} />
