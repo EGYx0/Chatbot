@@ -25,8 +25,8 @@ function ChatContainer() {
     <div className="app-container">
       {chatMessages.length === 0 ? (
         <p>
-          Welcome {user.name} to the chatbot project! Send a message using the
-          textbox below.
+          Welcome <strong>{user?.username}</strong> to the chatbot project! Send
+          a message using the textbox below.
         </p>
       ) : (
         <ChatMessages chatMessages={chatMessages} />
@@ -35,12 +35,6 @@ function ChatContainer() {
         chatMessages={chatMessages}
         setChatMessages={setChatMessages}
       />
-      <dotlottie-player
-        src="your-animation.lottie"
-        autoplay
-        loop
-        style={{ width: "200px", height: "200px" }}
-      ></dotlottie-player>
     </div>
   );
 }

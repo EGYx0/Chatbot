@@ -6,7 +6,6 @@ export function useAutoScroll(dependencies) {
     const containerElem = chatMessagesRef.current;
     if (containerElem) {
       containerElem.scrollTop = containerElem.scrollHeight;
-      console.log(containerElem.scrollHeight);
     }
   }, [dependencies]);
 

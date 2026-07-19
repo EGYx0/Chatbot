@@ -1,5 +1,7 @@
 import "./App.css";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import LoginPage from "./LoginPage";
+import Signup from "./Signup";
 import Login from "./Login";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import ChatContainer from "./ChatContainer";
@@ -9,7 +11,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/LoginPage" element={<LoginPage />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/Login" element={<Login />} />
       <Route
         path="/"
         element={
@@ -17,10 +21,10 @@ function App() {
             <h1>Hello from home</h1>
             <button
               onClick={() => {
-                navigate("/chat");
+                navigate("/LoginPage");
               }}
             >
-              Log In
+              Start
             </button>
           </>
         }
